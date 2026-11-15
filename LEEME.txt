@@ -1,0 +1,1 @@
+Sube index.html a la raiz del repositorio Love26 de GitHub, reemplazando el anterior. Espera la publicacion y recarga con Ctrl+F5. La camara requiere permiso y conexion a internet. Si el CDN esta bloqueado, el juego se puede usar con clic o toque.
