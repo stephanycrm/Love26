@@ -1,0 +1,35 @@
+name: Publicar S y J con MediaPipe local
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar biblioteca y modelo
+        run: |
+          mkdir -p vendor/tasks-vision
+          curl --fail --retry 3 -L https://registry.npmjs.org/@mediapipe/tasks-vision/-/tasks-vision-0.10.21.tgz -o /tmp/vision.tgz
+          tar -xzf /tmp/vision.tgz --strip-components=1 -C vendor/tasks-vision
+          curl --fail --retry 3 -L https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task -o vendor/hand_landmarker.task
+          mkdir -p /tmp/site
+          cp index.html styles.css script.js /tmp/site/
+          cp -r vendor /tmp/site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: /tmp/site
+      - uses: actions/deploy-pages@v4
+        id: deployment

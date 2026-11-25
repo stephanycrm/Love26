@@ -1,0 +1,4 @@
+S & J — Love26
+Sube index.html, styles.css y script.js juntos a la raíz de Love26. Las 33 fotos están integradas en script.js. No hay cuestionario ni envío de correo.
+MediaPipe: para publicar los archivos de la biblioteca en el mismo sitio, entra en Settings > Pages > Source > GitHub Actions. En el repositorio crea el archivo .github/workflows/pages.yml (Add file > Create new file, escribe la ruta completa) y pega el contenido de pages-workflow.txt. Commit changes. En Actions verifica que el flujo termine correctamente. Este flujo descarga la biblioteca y el modelo y los publica junto con la página. No necesitas subir pages-workflow.txt. Si mantienes la publicación desde main, el sitio usa CDN como alternativa, pero podría fallar de nuevo.
+No se han podido descargar ni probar los binarios de MediaPipe en este entorno. La cámara requiere HTTPS, permisos y navegador compatible. Si falla, todos los regalos se pueden abrir tocando la pantalla.
